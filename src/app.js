@@ -38,6 +38,15 @@ app.put('/livros/:id', (req, res) => {
     res.json(livros);
 })
 
+// criando método DELETE
+app.delete('/livros/:id', (req, res) => {
+    let {id} = req.params;
+    let index = buscaLivro(id);
+    // metodo splice (delete) a partir do index, apenas 1 elemento
+    livros.splice(index, 1)
+    res.send(`Livro ${id} removido com sucesso`);
+})
+
 // criando função para buscar livro por id
 function buscaLivro(id){
     return livros.findIndex(livro => livro.id == id)
