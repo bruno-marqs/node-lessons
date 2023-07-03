@@ -7,6 +7,7 @@ const router = express.Router();
 // cria rota de requisição
 router
   .get("/livros", LivroController.listarLivros)
+  .get("/livros/:id", LivroController.listarLivrosPorId)
   .post("/livros", LivroController.cadastrarLivro)
   .put("/livros/:id", LivroController.atualizarLivro)
 
