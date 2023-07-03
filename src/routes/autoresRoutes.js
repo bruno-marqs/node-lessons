@@ -1,5 +1,5 @@
 import express from "express";
-import AutorController from "../controllers/autoresControlle.js";
+import AutorController from "../controllers/autoresController.js";
 
 // atribui variavel
 const router = express.Router();
