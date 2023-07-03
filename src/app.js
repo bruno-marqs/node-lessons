@@ -31,12 +31,6 @@ app.get('/livros/:id', (req, res) => {
     res.json(livros[index]);
 })
 
-// criando método POST 
-app.post('/livros', (req, res) => {
-    livros.push(req.body);
-    res.status(201).send('Livro foi cadastrado com sucesso')
-})
-
 // criando método PUT
 app.put('/livros/:id', (req, res) => {
     let index = buscaLivro(req.param.id);
