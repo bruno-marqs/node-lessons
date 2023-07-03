@@ -1,6 +1,7 @@
 import express from "express";
 import db from "./config/dbConnect.js";
 import livros from "./models/Livro.js";
+import routes from "./routes/index.js";
 
 // criando a conexão
 db.on("error", console.log.bind(console, 'Erro de Conexão'))
@@ -13,7 +14,10 @@ db.once("open", () => {
 const app = express();
 
 // criando interpretador json do Express
-app.use(express.json())
+app.use(express.json());
+
+// instanciando rotas
+routes(app);
 
 // criando um array de livros
 // const livros = [
@@ -22,10 +26,6 @@ app.use(express.json())
 // ]
 
 // criando método GET
-app.get('/', (req, res) => {
-    res.status(200).send('Curso de Node');
-})
-
 app.get('/livros/:id', (req, res) => {
     let index = buscaLivro(req.param.id);
     res.json(livros[index]);
