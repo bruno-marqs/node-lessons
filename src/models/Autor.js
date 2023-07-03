@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 
+// criando o atributos do model livro
 const autorSchema = new mongoose.Schema(
     {
         id: {type: String},
