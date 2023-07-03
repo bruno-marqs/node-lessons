@@ -1,5 +1,6 @@
 import express from "express";
-import db from "./config/dbConnect.js"
+import db from "./config/dbConnect.js";
+import livros from "./models/Livro.js";
 
 // criando a conexão
 db.on("error", console.log.bind(console, 'Erro de Conexão'))
@@ -15,17 +16,19 @@ const app = express();
 app.use(express.json())
 
 // criando um array de livros
-const livros = [
-    {id: 1, "titulo": "O Senhor do Anéis"},
-    {id: 2, "titulo": "O Hobbit"}
-]
+// const livros = [
+//     {id: 1, "titulo": "O Senhor do Anéis"},
+//     {id: 2, "titulo": "O Hobbit"}
+// ]
 
-// criando método GETT
+// criando método GET
 app.get('/', (req, res) => {
     res.status(200).send('Curso de Node');
 })
 app.get('/livros', (req, res) => {
-    res.status(200).json(livros)
+    livros.find((err, livros) => {
+        res.status(200).json(livros)
+    })
 })
 
 app.get('/livros/:id', (req, res) => {
