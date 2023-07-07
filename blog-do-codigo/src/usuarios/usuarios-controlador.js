@@ -10,8 +10,8 @@ function criaTokenJWT(usuario) {
     id: usuario.id
   };
 
-  // criando assinatura + node -e "console.log( require('crypto').randomBytes(256).toString('base64'))"
-  const token = jwt.sign(payload, 'AIZPddWzNUFtxCHyeQ0YLtpDsaEZ4hnfOYsMPB8CbgzKgHvziiAkWEtJB/erJttDKvL/SodCU71j2YoljZarCv6i4XWEQFjMp7ZNIn75TPquZXjt/bMeckhdPEsi1p2xOgq4PHGUuHldod0svt3B4JXJdBXdL9Vz7L7BAQ/GJRn4Q5yLcnDPOzQTNjRiyIMS+nWh+UqQ8ktP2wXySr4tq9QFGEMjvHGvMeaPX2EvDJeFgJTXlBx/XSRCqh5LXI9qLuWNUI3pz485b/qkMOsCKlFsZUMOeSqArwdn3edIhU3Q58oB2qoBfSJEZ2OjJroSvJQpvyVdVU4PBvve/9tkZQ==');
+  // criando assinatura com variavel de ambiente
+  const token = jwt.sign(payload, process.env.CHAVE_JWT);
   return token
 
 }
