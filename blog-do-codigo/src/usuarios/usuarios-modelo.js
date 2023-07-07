@@ -25,38 +25,34 @@ class Usuario {
     validacoes.campoStringNaoNulo(senha, 'senha');
     validacoes.campoTamanhoMinimo(senha, 'senha', 8);
     validacoes.campoTamanhoMaximo(senha, 'senha', 64);
-    
+
     this.senhaHash = await Usuario.gerarSenhaHash(senha);
   }
 
   valida() {
     validacoes.campoStringNaoNulo(this.nome, 'nome');
     validacoes.campoStringNaoNulo(this.email, 'email');
-    validacoes.campoStringNaoNulo(this.senha, 'senha');
-    validacoes.campoTamanhoMinimo(this.senha, 'senha', 8);
-    validacoes.campoTamanhoMaximo(this.senha, 'senha', 64);
   }
 
-  
   async deleta() {
     return usuariosDao.deleta(this);
   }
-  
+
   static async buscaPorId(id) {
     const usuario = await usuariosDao.buscaPorId(id);
     if (!usuario) {
       return null;
     }
-    
+
     return new Usuario(usuario);
   }
-  
+
   static async buscaPorEmail(email) {
     const usuario = await usuariosDao.buscaPorEmail(email);
     if (!usuario) {
       return null;
     }
-    
+
     return new Usuario(usuario);
   }
 
@@ -66,9 +62,8 @@ class Usuario {
 
   static gerarSenhaHash(senha) {
     const custoHash = 12;
-    return bcrypt.hash(senha, custoHash)
+    return bcrypt.hash(senha, custoHash);
   }
-
 }
 
 module.exports = Usuario;

@@ -11,7 +11,7 @@ module.exports = {
         email
       });
 
-      await usuario.adicionaSenha(senha)
+      await usuario.adicionaSenha(senha);
 
       await usuario.adiciona();
 
