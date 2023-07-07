@@ -27,6 +27,11 @@ module.exports = {
     }
   },
 
+  // criando controlador login
+  login:  (req, res) => {
+    res.status(204).send();
+  },
+
   lista: async (req, res) => {
     const usuarios = await Usuario.lista();
     res.json(usuarios);
