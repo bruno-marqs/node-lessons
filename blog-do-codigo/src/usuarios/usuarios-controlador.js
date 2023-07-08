@@ -10,8 +10,8 @@ function criaTokenJWT(usuario) {
     id: usuario.id
   };
 
-  // criando assinatura com variavel de ambiente
-  const token = jwt.sign(payload, process.env.CHAVE_JWT);
+  // criando assinatura com variavel de ambiente + expiração
+  const token = jwt.sign(payload, process.env.CHAVE_JWT, { expiresIn: '15m' });
   return token
 
 }
