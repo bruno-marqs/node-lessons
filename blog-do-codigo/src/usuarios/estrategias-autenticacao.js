@@ -1,7 +1,9 @@
 // importando (com require) os modules
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
+const BearerStrategy = require('passport-http-bearer').Strategy;
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
 // importando modelo Usuario
 const Usuario = require('./usuarios-modelo')
@@ -25,7 +27,7 @@ async function verificaSenha(senha, senhaHash) {
     }
 }
 
-// criando estrategia de autenticacao
+// criando estrategia local de autenticacao
 passport.use(
     new LocalStrategy({
         usernameField: 'email',
@@ -43,4 +45,23 @@ passport.use(
         }
 
     })
+)
+
+// criando estrategia para bearer (portador) do token
+passport.use(
+    new BearerStrategy(
+        //criando função verificação
+        async (token, done) => {
+            // encapsulando no try-catch
+            try {
+                const payload = jwt.verify(token, process.env.CHAVE_JWT);
+                const usuario = await Usuario.buscaPorId(payload.id);
+                //retorno
+                done(null, usuario)
+            } catch (erro) {
+                done(erro);
+            }
+
+        }
+    )
 )
